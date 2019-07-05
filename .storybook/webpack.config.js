@@ -13,6 +13,8 @@ module.exports = async ({ config, mode }) => {
     include: path.resolve(__dirname, '../'),
   });
 
+  config.resolve.extensions = ['.js', '.jsx', '.scss'];
+
   // Return the altered config
   return config;
 };

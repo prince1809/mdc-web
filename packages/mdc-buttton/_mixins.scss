@@ -1,0 +1,87 @@
+@import "./variables";
+
+@mixin mdc-button-core-styles($query: mdc-feature-all()) {
+  @include mdc-button-without-ripple($query);
+  @include mdc-button-ripple($query);
+}
+
+@mixin mdc-button-without-ripple($query: mdc-feature-all()) {
+  .mdc-button {
+    @include mdc-button-base_($query);
+  }
+  .mdc-button__icon {
+  }
+}
+
+@mixin mdc-button-ripple($query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-filled-accessible(
+  $container-fill-color,
+  $query: mdc-feature-all()
+) {
+}
+
+@mixin mdc-button-container-fill-color($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-outline-color($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-icon-color($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-ink-color($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-shape-radius(
+  $radius,
+  $rtl-reflexive: false,
+  $query: mdc-feature-all()
+) {
+}
+
+@mixin mdc-button-horizontal-padding($padding, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-button-outline-width(
+  $outline-width,
+  $padding: $mdc-button-contained-horizontal-padding,
+  $query: mdc-query-all()
+) {
+}
+
+@mixin mdc-button-base_($query) {
+  //$feat-structure: mdc-feature-create-target($query, structure);
+
+  display: inline-flex;
+  background-color: green;
+}
+
+@mixin mdc-button__icon_ {
+}
+
+@mixin mdc-button__icon-trailing_ {
+}
+
+@mixin mdc-button__icon-svg_ {
+}
+
+@mixin mdc-button__icon-contained_ {
+}
+
+@mixin mdc-button__icon-contained-trailing_ {
+}
+
+@mixin mdc-button--outlined_($qury) {
+}
+
+@mixin mdc-button--filled_($query) {
+}
+
+@mixin mdc-button--rainsed_($query) {
+}
+
+@mixin mdc-button--dense_() {
+  height: 20px;
+}

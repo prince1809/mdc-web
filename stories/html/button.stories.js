@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import '../styles/button.scss'
+import '../styles/button'
 
 class DefaultButton extends React.Component {
 
@@ -11,14 +11,14 @@ class DefaultButton extends React.Component {
       <div>
         <h3>{title}</h3>
         <button className={`demo-button mdc-button ${variantClass}`} ref={this.initRipple}>
-          <span>Default</span>
+          <span className={`mdc-button__label`}>Default</span>
         </button>
-        <button>
-          <span>Dense</span>
+        <button className={`demo-button mdc-button mdc-button--dense ${variantClass}`} ref={this.initRipple}>
+          <span className='mdc-button__label'>Dense</span>
         </button>
-        <button>
-          <i>favorite</i>
-          <span>Icon</span>
+        <button className={`demo-button mdc-button ${variantClass}`} ref={this.initRipple}>
+          <i className='material-icons mdc-button__icon'>favorite</i>
+          <span className='mdc-button__label'>Icon</span>
         </button>
       </div>
     );
@@ -39,4 +39,4 @@ class DefaultButton extends React.Component {
 
 
 storiesOf('Button', module)
-  .add('to Storybook', () => <DefaultButton />);
+  .add('Default', () => <DefaultButton />);
