@@ -1,0 +1,6 @@
+@import "./constants";
+
+@function mdc-theme-is-var-with-fallback_($style) {
+  @return type-of($style) == "map" and map-has-key($style, "varname") and
+    map-has-key($style, "fallback");
+}

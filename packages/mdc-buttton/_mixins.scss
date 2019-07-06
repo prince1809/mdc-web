@@ -11,13 +11,17 @@
 
 @mixin mdc-button-without-ripple($query: mdc-feature-all()) {
   $feat-color: mdc-feature-create-target($query, color);
+  $feat-structure: mdc-feature-create-target($query, structure);
+
   .mdc-button {
     @include mdc-button-base_($query);
     @include mdc-button-shape-radius(small, $query: $query);
     @include mdc-button-container-fill-color(transparent, $query);
 
     .mdc-button__icon {
-      // @include mdc-feat
+      @include mdc-feature-targets($feat-structure) {
+        @include mdc-button__icon_;
+      }
     }
   }
 }
@@ -36,6 +40,7 @@
 
   &:not(:disabled) {
     @include mdc-feature-targets($feat-color) {
+      @include mdc-theme-prop(background-color, $color, $edgeOptOut: true);
     }
   }
 }
@@ -101,6 +106,13 @@
 }
 
 @mixin mdc-button__icon_ {
+  //@include mdc-rtl-reflexive-box(margin, right, 8px);
+
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  vertical-align: top;
 }
 
 @mixin mdc-button__icon-trailing_ {

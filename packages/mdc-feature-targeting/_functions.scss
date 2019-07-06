@@ -14,11 +14,67 @@
   $available-features: ();
 
   @each $target in $feature-targets {
-    $available-features: append($available-features, map-get($target, $target));
+    $available-features: append($available-features, map-get($target, target));
   }
 
   @return (
     available: $available-features,
     query: map-get(nth($feature-targets, 1), query)
   );
+}
+
+@function mdc-feature-all($feature-queries...) {
+  $valid: mdc-feature-verify-query_($feature-queries...);
+
+  @return (op: all, queries: $feature-queries);
+}
+
+@function mdc-feature-any($feature-queries...) {
+  @return ();
+}
+
+@function mdc-feature-without($feature-query) {
+  @return ();
+}
+
+// Verifies that the given feature targets are valid, throws an error otherwise.
+@function mdc-feature-verify-target_($feature-targets...) {
+  @each $target in $feature-targets {
+    @if type-of($target) != map {
+      @error "Invalid feature target: '#{$target}'. Must be a map.";
+    }
+
+    $targeted-feature: map-get($target, target);
+    $feature-query: map-get($target, query);
+    $valid: mdc-feature-verify-feature_($targeted-feature) and
+      mdc-feature-verify-query_($feature-query);
+  }
+
+  @return true;
+}
+@function mdc-feature-is-query-satisfied_($feature-query, $available-features) {
+  @return true;
+}
+
+@function mdc-feature-verify-query_($feature-queries...) {
+  @each $query in $feature-queries {
+    @if type-of($query) == map {
+      $op: map-get($query, op);
+      $sub-queries: map-get($query, queries);
+      $valid: mdc-feature-verify-query_($sub-queries...);
+
+      @if not mdc-feature-list-contains_($mdc-feature-all-query-operators, $op)
+      {
+        @error "Invalid feature query operator: '#{$op}'. " +
+        "Valid operators are: #{$mdc-feature-all-query-operators}";
+      }
+    } @else {
+      $valid: mdc-feature-verify-feature_($query);
+    }
+  }
+  @return true;
+}
+
+@function mdc-feature-list-contains_($list, $item) {
+  @return index($list, $item) != null;
 }
