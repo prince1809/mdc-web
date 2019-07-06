@@ -6,6 +6,11 @@ import '../styles/button'
 
 class DefaultButton extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.ripples = [];
+  }
+
   renderButtonVariant(title, variantClass) {
     return (
       <div>
@@ -28,15 +33,14 @@ class DefaultButton extends React.Component {
     return (
       <div>
         {this.renderButtonVariant('Text Button')}
-        {this.renderButtonVariant('Raised Button')}
-        {this.renderButtonVariant('Unelevated Button')}
-        {this.renderButtonVariant('Outlined Button')}
-        {this.renderButtonVariant('Shaped Button')}
+        {this.renderButtonVariant('Raised Button', 'mdc-button--raised')}
+        {this.renderButtonVariant('Unelevated Button', 'mdc-button--unelevated')}
+        {this.renderButtonVariant('Outlined Button', 'mdc-button--outlined')}
+        {this.renderButtonVariant('Shaped Button', 'mdc-button--unelevated demo-button-shaped')}
       </div>
     )
   }
 }
-
 
 storiesOf('Button', module)
   .add('Default', () => <DefaultButton />);

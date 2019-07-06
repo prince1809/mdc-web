@@ -1,5 +1,6 @@
 @import "mdc-feature-targeting/_mixins";
 @import "mdc-feature-targeting/_functions";
+@import "mdc-rtl/_mixins";
 @import "mdc-theme/_functions";
 @import "mdc-theme/_mixins";
 @import "./variables";
@@ -23,6 +24,43 @@
         @include mdc-button__icon_;
       }
     }
+
+    @include mdc-button-ink-color(primary, $query);
+  }
+
+  .mdc-button__label + .mdc-button__icon {
+    @include mdc-feature-targets($feat-structure) {
+      @include mdc-button__icon-trailing_;
+    }
+  }
+
+  svg.mdc-button__icon {
+    @include mdc-feature-targets($feat-structure) {
+      @include mdc-button__icon-svg_;
+    }
+  }
+
+  .mdc-button--raised,
+  .mdc-button--unelevated,
+  .mdc-button--outlined {
+    .mdc-button__icon {
+      @include mdc-feature-targets($feat-structure) {
+        @include mdc-button__icon-contained_;
+      }
+    }
+
+    .mdc-button__label + .mdc-button__icon {
+      @include mdc-feature-targets($feat-structure) {
+        @include mdc-button__icon-contained-trailing_;
+      }
+    }
+  }
+
+  .mdc-button--raised,
+  .mdc-button--unelevated {
+    @include mdc-button--filled_($query);
+    @include mdc-button-container-fill-color(primary, $query);
+    //@include mdc-button-ink-color(on-primary, $query);
   }
 }
 
@@ -52,6 +90,13 @@
 }
 
 @mixin mdc-button-ink-color($color, $query: mdc-feature-all()) {
+  $feat-color: mdc-feature-create-target($query, color);
+
+  &:not(:disabled) {
+    @include mdc-feature-targets($feat-color) {
+      @include mdc-theme-prop(color, $color);
+    }
+  }
 }
 
 @mixin mdc-button-shape-radius(

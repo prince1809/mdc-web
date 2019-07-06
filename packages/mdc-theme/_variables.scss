@@ -1,5 +1,18 @@
 @import "./functions";
 
+$mdc-theme-primary: #6200ee !default;
+$mdc-theme-on-primary: if(
+  mdc-theme-contrast-tone($mdc-theme-primary) == "dark",
+  #000,
+  #fff
+) !default;
+
+$mdc-theme-property-values: (
+  // Primary
+    primary: $mdc-theme-primary,
+  on-primary: $mdc-theme-on-primary
+) !default;
+
 @function mdc-theme-is-valid-theme-prop-value_($style) {
   @return type-of($style) == "color" or $style == "currentColor" or
     str_slice($style, 1, 4) == "var(";
