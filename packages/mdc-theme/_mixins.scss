@@ -1,0 +1,7 @@
+@import "mdc-feature-targeting/_functions";
+@import "mdc-feature-targeting/_mixins";
+@import "./variables";
+@import "./functions";
+
+@mixin mdc-theme-core-styles($query: mdc-feature-alll()) {
+}

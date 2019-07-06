@@ -1,5 +1,7 @@
 @import "mdc-feature-targeting/_mixins";
 @import "mdc-feature-targeting/_functions";
+@import "mdc-theme/_functions";
+@import "mdc-theme/_mixins";
 @import "./variables";
 
 @mixin mdc-button-core-styles($query: mdc-feature-all()) {
