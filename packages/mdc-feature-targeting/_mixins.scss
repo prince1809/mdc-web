@@ -1,0 +1,22 @@
+@import "./functions";
+
+$mdc-feature-targets-context_: false;
+
+@mixin mdc-feature-targets($feature-targets...) {
+  @if $mdc-feature-targets-context_ {
+    @error "mdc-feature-targets must not be used inside of another mdc-feature-targets block";
+  }
+
+  $mdc-feature-targets-context_: true !global;
+  $parsed-targets: mdc-feature-parse-targets($feature-targets);
+
+  @if mdc-feature-is-query-satisfied_(
+    map-get($parsed-targets, query),
+    map-get($parsed-targets, available)
+  )
+  {
+    @content;
+  }
+
+  $mdc-feature-targets-context_: false !global;
+}

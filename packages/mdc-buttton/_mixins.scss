@@ -1,3 +1,5 @@
+@import "mdc-feature-targeting/_mixins";
+@import "mdc-feature-targeting/_functions";
 @import "./variables";
 
 @mixin mdc-button-core-styles($query: mdc-feature-all()) {
@@ -6,10 +8,15 @@
 }
 
 @mixin mdc-button-without-ripple($query: mdc-feature-all()) {
+  $feat-color: mdc-feature-create-target($query, color);
   .mdc-button {
     @include mdc-button-base_($query);
-  }
-  .mdc-button__icon {
+    @include mdc-button-shape-radius(small, $query: $query);
+    @include mdc-button-container-fill-color(transparent, $query);
+
+    .mdc-button__icon {
+      // @include mdc-feat
+    }
   }
 }
 
@@ -23,6 +30,12 @@
 }
 
 @mixin mdc-button-container-fill-color($color, $query: mdc-feature-all()) {
+  $feat-color: mdc-feature-create-target($query, color);
+
+  &:not(:disabled) {
+    @include mdc-feature-targets($feat-color) {
+    }
+  }
 }
 
 @mixin mdc-button-outline-color($color, $query: mdc-feature-all()) {
@@ -42,6 +55,11 @@
 }
 
 @mixin mdc-button-horizontal-padding($padding, $query: mdc-feature-all()) {
+  $feat-structure: mdc-feature-create-target($query, structure);
+
+  @include mdc-feature-targets($feat-structure) {
+    padding: 0 $padding 0 $padding;
+  }
 }
 
 @mixin mdc-button-outline-width(
@@ -52,10 +70,32 @@
 }
 
 @mixin mdc-button-base_($query) {
-  //$feat-structure: mdc-feature-create-target($query, structure);
+  $feat-color: mdc-feature-create-target($query, color);
+  $feat-structure: mdc-feature-create-target($query, structure);
 
-  display: inline-flex;
-  background-color: green;
+  @include mdc-feature-targets($feat-structure) {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+    height: $mdc-button-height;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  &::-moz-focus-inner {
+    @include mdc-feature-targets($feat-structure) {
+      padding: 0;
+      border: 0;
+    }
+  }
 }
 
 @mixin mdc-button__icon_ {

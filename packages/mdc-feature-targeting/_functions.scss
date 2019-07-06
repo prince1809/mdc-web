@@ -1,0 +1,24 @@
+@import "./variables";
+
+@function mdc-feature-create-target($feature-query, $target-feature) {
+  $feature-target: (
+    query: $feature-query,
+    target: $target-feature
+  );
+
+  @return $feature-target;
+}
+
+@function mdc-feature-parse-targets($feature-targets) {
+  $valid: mdc-feature-verify-target_($feature-targets...);
+  $available-features: ();
+
+  @each $target in $feature-targets {
+    $available-features: append($available-features, map-get($target, $target));
+  }
+
+  @return (
+    available: $available-features,
+    query: map-get(nth($feature-targets, 1), query)
+  );
+}
