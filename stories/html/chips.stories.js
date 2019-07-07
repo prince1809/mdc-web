@@ -2,15 +2,18 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import '../styles/button'
+import '../styles/chip'
 
 class DefaultChips extends React.Component {
 
   constructor(props) {
     super(props);
-    this.ripples = [];
+    this.chipSets = [];
   }
 
+  componentWillUnmount() {
+    this.chipSets.forEach(chipSet => chipSet.destroy());
+  }
 
   renderIcon(name, clasess) {
     return (
@@ -80,7 +83,6 @@ class DefaultChips extends React.Component {
           {this.renderFilterChip('Charlie', 'mdc-chip--selected', this.renderIcon('face', 'mdc-chip__icon--leading'))}
           {this.renderFilterChip('Danielle', 'mdc-chip--selected', this.renderIcon('face', 'mdc-chip__icon--leading'))}
         </div>
-
       </div>
     )
   }
