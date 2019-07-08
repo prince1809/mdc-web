@@ -35,9 +35,11 @@ class Card extends React.Component {
         <div>
           {image ? <CardMedia showText={type === basicMediaText} square={type === uiControl} /> : null}
           {type !== basicHeader && type !== basicMediaText ? <CardHeader /> : null}
-
           {type !== uiControl ? <CardSecondary /> : null}
         </div>
+        {actions ? (
+          <CardActionRow showIcons={type !== basicButtons} showButtons={type !== basicButtons} />
+        ) : null}
       </div>
     );
   }
@@ -69,6 +71,47 @@ const CardMedia = ({ square = false, showText = false }) => {
     </div>
   )
 }
+
+class CardActionIcon extends React.Component {
+
+  render() {
+    return (
+      <button>
+        {this.props.icon}
+      </button>
+    );
+  }
+}
+
+class CardActionButton extends React.Component {
+
+  render() {
+    return (
+      <button>
+        {this.props.text}
+      </button>
+    )
+  }
+}
+
+class CardActionRow extends React.Component {
+  render() {
+    const { showIcons = true, showButtons = true } = this.props;
+    return (
+      <div className='mdc-card__actions'>
+        {
+          showButtons ?
+            <div>
+              <CardActionButton text='Read' />
+              <CardActionButton text='Bookmark' />
+            </div> : null
+        }
+      </div>
+    )
+  }
+}
+
+
 
 const CardDemos = () => {
   return (
