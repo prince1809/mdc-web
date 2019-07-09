@@ -8,12 +8,21 @@
   $feat-structure: mdc-feature-create-target($query, structure);
 
   @for $z-value from 0 through 24 {
-    .mdc-elevation--z#{z-value} {
+    .mdc-elevation--z#{$z-value} {
       @include mdc-elevation($z-value, $query: $query);
     }
   }
-}
 
+  .mdc-elevation-transition {
+    @include mdc-feature-targets($feat-animation) {
+      transition: mdc-elevation-transition-value();
+    }
+
+    // @include mdc-feature-targets($feat-structure) {
+    //   will-change: $mdc-elevation-property;
+    // }
+  }
+}
 @mixin mdc-elevation(
   $z-value,
   $color: $mdc-elevation-baseline-color,
@@ -31,16 +40,20 @@
   $feat-color: mdc-feature-create-target($query, color);
   $color: mdc-theme-prop-value($color);
 
-  @warn "Color Value: " $color;
-
   $umbra-z-value: map-get($mdc-elevation-umbra-map, $z-value);
   $penumbra-z-value: map-get($mdc-elevation-penumbra-map, $z-value);
   $ambient-z-value: map-get($mdc-elevation-ambient-map, $z-value);
 
-  // $umbra-color: rgba($color, $mdc-elevation-umbra-opacity + $opacity-boost);
-  // $penumbra-color: rgba(
-  //   $color,
-  //   $mdc-elevation-penumbra-opacity + $opacity-boost
-  // );
-  // $ambient-color: rgba($color, $mdc-elevation-ambient-opacity + $opacity-boost);
+  $umbra-color: rgba($color, $mdc-elevation-umbra-opacity + $opacity-boost);
+  $penumbra-color: rgba(
+    $color,
+    $mdc-elevation-penumbra-opacity + $opacity-boost
+  );
+  $ambient-color: rgba($color, $mdc-elevation-ambient-opacity + $opacity-boost);
+
+  @include mdc-feature-targets($feat-color) {
+    box-shadow: #{"#{$umbra-z-value} #{$umbra-color}"},
+      #{"#{$penumbra-z-value} #{$penumbra-color}"},
+      #{$ambient-z-value} $ambient-color;
+  }
 }

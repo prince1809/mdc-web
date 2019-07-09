@@ -4,13 +4,22 @@ $mdc-elevation-penumbra-opacity: 0.14 !default;
 $mdc-elevation-ambient-opacity: 0.12 !default;
 
 $mdc-elevation-umbra-map: (
-  0: "0px 0px 0px 0px"
+  0: "0px 0px 0px 0px",
+  1: "0px 2px 1px -1px",
+  2: "0px 3px 1px -2px",
+  3: "0px 3px 3px -2px"
 ) !default;
 
 $mdc-elevation-penumbra-map: (
-  0: "0px 0px 0px 0px"
+  0: "0px 0px 0px 0px",
+  1: "0px 1px 1px 0px",
+  2: "0px 2px 2px 0px",
+  3: "0px 3px 4px 0px"
 ) !default;
 
 $mdc-elevation-ambient-map: (
-  0: "0px 0px 0px 0px"
+  0: "0px 0px 0px 0px",
+  1: "0px 1px 3px 0px",
+  2: "0px 1px 5px 0px",
+  3: "0px 1px 8px 0px"
 ) !default;
