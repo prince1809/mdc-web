@@ -1,0 +1,29 @@
+.ripple-demos {
+  display: flex;
+  flex: 1 1 45%;
+  flex-wrap: wrap;
+}
+
+.ripple-demo-col {
+  min-width: 400px;
+}
+
+.ripple-demo-box,
+.ripple-demo-icon {
+  cursor: pointer;
+  outline: none;
+}
+
+.ripple-demo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: #dddddd;
+  overflow: hidden;
+}
