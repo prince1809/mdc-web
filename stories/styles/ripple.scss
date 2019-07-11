@@ -1,3 +1,7 @@
+@import "mdc-elevation/_mixins";
+@import "mdc-ripple/_mixins";
+@import "mdc-theme/_mixins";
+
 .ripple-demos {
   display: flex;
   flex: 1 1 45%;
@@ -10,6 +14,7 @@
 
 .ripple-demo-box,
 .ripple-demo-icon {
+  @include mdc-ripple-surface;
   cursor: pointer;
   outline: none;
 }
@@ -26,4 +31,12 @@
   -webkit-user-select: none;
   background-color: #dddddd;
   overflow: hidden;
+}
+
+.ripple-demo-icon {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  padding: 12px;
+  overflow: visible;
 }
