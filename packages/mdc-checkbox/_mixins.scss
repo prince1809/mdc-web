@@ -1,0 +1,149 @@
+@import "mdc-feature-targeting/_functions";
+@import "mdc-feature-targeting/_mixins";
+@import "./keyframes";
+@import "./variables";
+
+@mixin mdc-checkbox-core-styles($query: mdc-feature-all()) {
+  @include mdc-checkbox-without-ripple($query);
+}
+
+@mixin mdc-checkbox-without-ripple($query: mdc-feature-all()) {
+  $feat-animation: mdc-feature-create-target($query, animation);
+  $feat-color: mdc-feature-create-target($query, color);
+  $feat-structure: mdc-feature-create-target($query, structure);
+
+  @include mdc-feature-targets($feat-animation) {
+    @include mdc-checkbox-mark-keyframes_;
+  }
+
+  .mdc-checkbox {
+    @include mdc-feature-targets($feat-structure) {
+      @include mdc-checkbox-base_;
+    }
+  }
+
+  @include mdc-checkbox-container-colors($query: $query);
+}
+
+@mixin mdc-checkbox-ripple($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox-touch-dimension(
+  $touch-dimension,
+  $query: mdc-feature-all()
+) {
+}
+
+@mixin mdc-checkbox-container-colors(
+  $unmarked-stroke-color: $mdc-checkbox-border-color,
+  $unmarked-filled-color: transparent,
+  $marked-stroke-color: $mdc-checkbox-baseline-theme-color,
+  $marked-fill-color: $mdc-checkbox-baseline-theme-color,
+  $generate-keyframes: true,
+  $query: mdc-feature-all()
+) {
+  $feat-animation: mdc-feature-create-target($query, animation);
+  $feat-color: mdc-feature-create-target($query, color);
+
+  @include mdc-checkbox-unmarked-background-selector-enabled_ {
+    @include mdc-feature-targets($feat-color) {
+      @include mdc-theme-prop(border-color, $marked-stroke-color);
+      @include mdc-theme-prop(background-color, $marked-fill-color);
+    }
+  }
+
+  @include mdc-checkbox-marked-background-selector-enabled_ {
+    @include mdc-feature-targets($feat-color) {
+      @include mdc-theme-prop(border-color, $marked-stroke-color);
+      @include mdc-theme-prop(background-color, $marked-fill-color);
+    }
+  }
+}
+
+@mixin mdc-checkbox-ink-colors($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox-focus-indicator-color($color, $query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox-base_ {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 $mdc-checkbox-size;
+  box-sizing: content-box;
+  width: $mdc-checkbox-size;
+  height: $mdc-checkbox-size;
+  line-height: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+@mixin mdc-checkbox-disabled-container-color_ {
+}
+
+@mixin mdc-checkbox--disabled_ {
+}
+
+@mixin mdc-checkbox__child--upgraded_ {
+}
+
+@mixin mdc-checkbox--anim_ {
+}
+
+@mixin mdc-checkbox-unmarked-background-selector-enabled_ {
+  .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate)
+    ~ .mdc-checkbox__background {
+    @content;
+  }
+}
+
+@mixin mdc-checkbox-unmarked-background-selector-disabled_ {
+}
+
+@mixin mdc-checkbox-marked-background-selector-enabled_ {
+  .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+  .mdc-checkbox__native-control:enabled:indeterminate
+    ~ .mdc-checkbox__background {
+    @content;
+  }
+}
+
+@mixin mdc-checkbox-marked-background-selector-disabled_ {
+}
+
+@mixin mdc-checkbox__background_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__focus-indicator_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__focu-indicator--focused_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__native-control_ {
+}
+
+@mixin mdc-checkbox__checkmark_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__checkmark--checked_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__checkmark--indeterminate_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__checkmark-path_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__checkmark-path--marked_ {
+}
+
+@mixin mdc-checkbox__mixedmark_($query: mdc-feature-all()) {
+}
+
+@mixin mdc-checkbox__mixedmark--checked_ {
+}
+
+@mixin mdc-checkbox__mixedmark--indeteminate_ {
+}
